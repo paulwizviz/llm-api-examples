@@ -1,12 +1,9 @@
 package main
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
-	"io"
+	"llma/internal/ollama"
 	"log"
-	"net/http"
 )
 
 type reqbody struct {
@@ -23,33 +20,11 @@ type respbody struct {
 
 func main() {
 
-	b, err := json.Marshal(reqbody{
-		Model:  "llama2",
-		Prompt: "What is life?",
-		Stream: false,
-	})
+	client := ollama.NewDefaultClient(120, ollama.DefaultLocalBaseURL, "llama2")
+	resp, err := client.Generate("what is life?")
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println(resp)
 
-	breader := bytes.NewReader(b)
-
-	resp, err := http.Post("http://localhost:11434/api/generate", "application/json", breader)
-	if err != nil {
-		log.Fatalf("Unable to post: %v", err)
-	}
-	defer resp.Body.Close()
-
-	rBody, err := io.ReadAll(resp.Body)
-	if err != nil {
-		log.Fatalf("Unable to read body: %v", err)
-	}
-
-	var data respbody
-	err = json.Unmarshal(rBody, &data)
-	if err != nil {
-		log.Fatalf("Unable to unmarshal response body: %v", err)
-	}
-
-	fmt.Printf("Response is: %v", data)
 }
