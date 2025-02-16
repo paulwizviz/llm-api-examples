@@ -2,6 +2,10 @@
 
 This project shares my references, knowledge and working examples to writing applications that interacts with Large Language Model.
 
+## Topics
+
+* [Ollama](./docs/ollama.md)
+
 
 ## Disclaimer
 
