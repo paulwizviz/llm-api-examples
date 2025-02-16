@@ -9,13 +9,13 @@ import (
 	"time"
 )
 
-type reqbody struct {
+type generateRequest struct {
 	Model  string `json:"model"`
 	Prompt string `json:"prompt"`
 	Stream bool   `json:"stream"`
 }
 
-type respbody struct {
+type generateResponse struct {
 	Model              string `json:"model"`
 	Created            string `json:"created_at"`
 	Response           string `json:"response"`
@@ -35,14 +35,14 @@ type defaultClient struct {
 	timeout int // seconds
 }
 
-func (c defaultClient) Generate(prompt string) (respbody, error) {
+func (c defaultClient) Generate(prompt string) (generateResponse, error) {
 
 	fullURL, err := url.JoinPath(c.baseURL, generateEndPoint)
 	if err != nil {
-		return respbody{}, err
+		return generateResponse{}, err
 	}
 
-	reqbody := reqbody{
+	reqbody := generateRequest{
 		Model:  c.model,
 		Prompt: prompt,
 		Stream: false,
@@ -50,13 +50,13 @@ func (c defaultClient) Generate(prompt string) (respbody, error) {
 
 	rbody, err := json.Marshal(reqbody)
 	if err != nil {
-		return respbody{}, err
+		return generateResponse{}, err
 	}
 	reqBody := bytes.NewReader(rbody)
 
 	req, err := http.NewRequest(http.MethodPost, fullURL, reqBody)
 	if err != nil {
-		return respbody{}, err
+		return generateResponse{}, err
 	}
 
 	req.Header.Set("Content-Type", "application/json")
@@ -66,20 +66,20 @@ func (c defaultClient) Generate(prompt string) (respbody, error) {
 	}
 	resp, err := httpClient.Do(req)
 	if err != nil {
-		return respbody{}, err
+		return generateResponse{}, err
 	}
 	defer resp.Body.Close()
 
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return respbody{}, err
+		return generateResponse{}, err
 	}
 
-	var rpBody respbody
-	err = json.Unmarshal(respBody, &rpBody)
+	var gResponse generateResponse
+	err = json.Unmarshal(respBody, &gResponse)
 	if err != nil {
-		return respbody{}, err
+		return generateResponse{}, err
 	}
 
-	return rpBody, nil
+	return gResponse, nil
 }

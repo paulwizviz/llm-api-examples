@@ -7,7 +7,7 @@ const (
 )
 
 type Client interface {
-	Generate(prompt string) (respbody, error)
+	Generate(prompt string) (generateResponse, error)
 }
 
 func NewDefaultClient(duration int, baseURL string, model string) Client {
