@@ -20,7 +20,8 @@ type respbody struct {
 
 func main() {
 
-	client := ollama.NewDefaultClient(120, ollama.DefaultLocalBaseURL, "llama2")
+	timeoutDuration := 120 //seconds
+	client := ollama.NewDefaultClient(timeoutDuration, ollama.DefaultLocalBaseURL, "llama2")
 	resp, err := client.Generate("what is life?")
 	if err != nil {
 		log.Fatal(err)
