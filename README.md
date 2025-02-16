@@ -17,7 +17,7 @@ This project is ongoing and may change without prior notification. By using this
 
 Unless otherwise specified, this project is copyrighted as follows:
 
-Copyright 2024 The Contributors to k8s-examples
+Copyright 2024 The Contributors to llm-api-examples
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at:
 
