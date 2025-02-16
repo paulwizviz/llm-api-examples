@@ -1,6 +1,6 @@
 # Overview
 
-This project shares my references, knowledge and working examples to writing applications that interacts with Large Language Model.
+This is an educational project demonstrating techniques writing applications that interacts with Large Language Model (LLM).
 
 ## Topics
 
