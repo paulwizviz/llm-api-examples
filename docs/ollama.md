@@ -124,4 +124,5 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
 
 ### Using curl
 
-* [Example 1](../examples/curl/ex1.sh) - This example demonstrates a text completion scenario using `curl` to interact with Llama via RESTFul API
+* [Example 1](../examples/curl/ex1.sh) - This example demonstrates a text completion scenario using `curl` to interact with Llama via RESTFul API streaming set to true.
+* [Example 2](../examples/curl/ex2.sh) - This example demonstrates a text completion scenaio using `curl` to interact with Llama via RESTFul API streaming set to false.
