@@ -3,60 +3,33 @@ package ollama
 import (
 	"bytes"
 	"encoding/json"
-	"io"
 	"net/http"
 	"net/url"
 	"time"
 )
 
-type generateRequest struct {
-	Model  string `json:"model"`
-	Prompt string `json:"prompt"`
-	Stream bool   `json:"stream"`
-}
-
-type generateResponse struct {
-	Model              string `json:"model"`
-	Created            string `json:"created_at"`
-	Response           string `json:"response"`
-	Done               bool   `json:"done"`
-	Context            []int  `json:"context"`
-	TotalDuration      int    `json:"total_duration"`
-	LoadDuration       int    `json:"load_duration"`
-	PromptEvalCount    int    `json:"prompt_eval_count"`
-	PromptEvalDuration int    `json:"prompt_eval_duration"`
-	EvalCount          int    `json:"eval_count"`
-	EvalDuration       int    `json:"eval_duration"`
-}
-
 type defaultClient struct {
 	baseURL string
-	model   string
 	timeout int // seconds
 }
 
-func (c defaultClient) Generate(prompt string) (generateResponse, error) {
+func (c defaultClient) Generate(request RequestGenerate) (*ResponseGenerate, error) {
 
-	fullURL, err := url.JoinPath(c.baseURL, generateEndPoint)
+	endPoint, err := url.JoinPath(c.baseURL, "/api/generate")
 	if err != nil {
-		return generateResponse{}, err
+		return nil, err
 	}
 
-	reqbody := generateRequest{
-		Model:  c.model,
-		Prompt: prompt,
-		Stream: false,
+	reqBody, err := json.Marshal(request)
+	if err != nil {
+		return nil, err
 	}
 
-	rbody, err := json.Marshal(reqbody)
-	if err != nil {
-		return generateResponse{}, err
-	}
-	reqBody := bytes.NewReader(rbody)
+	rBody := bytes.NewReader(reqBody)
 
-	req, err := http.NewRequest(http.MethodPost, fullURL, reqBody)
+	req, err := http.NewRequest(http.MethodPost, endPoint, rBody)
 	if err != nil {
-		return generateResponse{}, err
+		return nil, err
 	}
 
 	req.Header.Set("Content-Type", "application/json")
@@ -64,22 +37,19 @@ func (c defaultClient) Generate(prompt string) (generateResponse, error) {
 	httpClient := http.Client{
 		Timeout: time.Duration(c.timeout) * time.Second,
 	}
-	resp, err := httpClient.Do(req)
+	response, err := httpClient.Do(req)
 	if err != nil {
-		return generateResponse{}, err
+		return nil, err
 	}
-	defer resp.Body.Close()
+	defer response.Body.Close()
 
-	respBody, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return generateResponse{}, err
-	}
+	decoder := json.NewDecoder(response.Body)
 
-	var gResponse generateResponse
-	err = json.Unmarshal(respBody, &gResponse)
+	var respBody ResponseGenerate
+	err = decoder.Decode(&respBody)
 	if err != nil {
-		return generateResponse{}, err
+		return nil, err
 	}
 
-	return gResponse, nil
+	return &respBody, nil
 }
