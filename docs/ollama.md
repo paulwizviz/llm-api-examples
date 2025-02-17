@@ -4,11 +4,12 @@ Ollama is a tool that simplifies running and managing large language models loca
 
 ## Installing and Setup
 
-* MacOS 
-    * Homebrew `brew install ollama`.
-        * This does not install a macOS Application
-        * You will need to start ollama's controller manually by running the command `ollama serve` before you can run a model.
-    * Other approach refer to [Github](https://github.com/ollama/ollama).
+### MacOS 
+
+* Homebrew `brew install ollama`.
+    * This does not install a macOS Application
+    * You will need to start ollama's controller manually by running the command `ollama serve` before you can run a model.
+* Other approach refer to [Github](https://github.com/ollama/ollama).
 
 ## Managing models
 
@@ -71,6 +72,13 @@ How it works together:
 ## Programming Techniques
 
 * [API Documentation](https://github.com/ollama/ollama/blob/main/docs/api.md)
-* Working examples
-    * Go and Llama
-        * [Example 1](../examples/gollama/ex1/main.go) - This example demonstrates a text completion interaction with Llama via RESTFul API.
+
+## Working examples
+
+### Go and Llama
+    
+* [Example 1](../examples/gollama/ex1/main.go) - This example demonstrates a text completion interaction with Llama via RESTFul API.
+
+### Using curl
+
+* [Example 1](../examples/curl/ex1.sh) - This example demonstrates a text completion scenario using `curl` to interact with Llama via RESTFul API
