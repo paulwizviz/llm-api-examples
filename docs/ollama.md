@@ -2,6 +2,14 @@
 
 Ollama is a tool that simplifies running and managing large language models locally on your computer.
 
+## Contents
+
+* [Installation and Setup](#installing-and-setup)
+* [Managing Models](#managing-models)
+* [Interacting with Models](#interacting-with-the-model)
+* [Programming Techniques](#programming-techniques)
+* [Working Examples](#working-examples)
+
 ## Installing and Setup
 
 ### MacOS 
@@ -68,6 +76,41 @@ How it works together:
 7. **Repeat**: The process repeats as the user continues the conversation.
 
 **Key takeaway**: The assistant isn't an intermediary; it's the role the Llama 2 model plays when generating responses.  Your chatbot application is the intermediary between the user and the Llama 2 model, formatting messages and managing the conversation flow.  The Llama 2 model becomes the assistant within the context of each API call.
+
+## Configuring models (`modelfiles`)
+
+A `modelfile` is a configuration file that tells Ollama how to use a specific language model. It is not the same as a model.
+
+| **Feature** | **Llama Model (or other LLM)** | `modelfile` |
+|---|---|---|
+| **What it is?** | The trained neural network | A configuration file |
+| **Content** |	Weights, biases, architecture of the model | Instructions, settings, system prompt |
+| **Purpose** | To understand and generate text | To tell Ollama how to use the model |
+| **Size** | Large (gigabytes) | Small (kilobytes) |
+| **Example** | llama2-7b.ggmlv3.q4_0.bin (a model file) | my-custom-model.modelfile |
+
+A `modelfile`  is used to configure the following:
+
+1. **Persona and Context (via the System Prompt)**: This is the most significant form of customization.  The system prompt within the modelfile (enclosed in <<SYS>> and <</SYS>> tags) defines the model's persona, role, and context.  This is where you tell the model:
+
+    * "You are a helpful and friendly travel agent."
+    * "You are a sarcastic movie critic."
+    * "You are a technical expert on quantum physics."
+
+The system prompt shapes how the model responds to user input, its tone of voice, its knowledge domain, and its overall behavior.
+
+2. **Generation Parameters**:  The modelfile allows you to adjust various parameters that control the text generation process.  These parameters influence things like:
+
+    * `temperature`: Controls the "randomness" or "creativity" of the model's output. A higher temperature (e.g., 0.8) makes the output more diverse and unpredictable, while a lower temperature (e.g., 0.2) makes it more deterministic and focused.
+    * `top_p (nucleus sampling)`: A way to control the diversity of the output. It sets a threshold for the cumulative probability of the most likely tokens.
+    * `top_k`: Another way to control diversity. It limits the model to considering only the top K most likely tokens at each step.
+    * `repeat_penalty`: Helps prevent the model from repeating the same words or phrases too often.
+
+3. **Fine-tuning (Advanced)**: While not directly within the modelfile itself, the modelfile often plays a role in fine-tuning.  Fine-tuning involves training the model on a specific dataset to adapt it to a particular task or domain. The base or from parameter in the modelfile indicates the starting model for fine-tuning.  After fine-tuning, you would then use the modelfile to configure and run the fine-tuned model.
+
+4. **Specific Instructions and Examples (via Prompts)**: While the system prompt sets the overall persona, individual prompts given to the model also contribute to customization.  You can provide specific instructions, examples, or constraints in your prompts to guide the model's behavior in each interaction.
+
+Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs/modelfile.md)
 
 ## Programming Techniques
 
