@@ -6,26 +6,18 @@ import (
 	"log"
 )
 
-type reqbody struct {
-	Model  string `json:"model"`
-	Prompt string `json:"prompt"`
-	Stream bool   `json:"stream"`
-}
-
-type respbody struct {
-	Model    string `json:"model"`
-	Created  string `json:"created_at"`
-	Response string `json:"response"`
-}
-
 func main() {
 
 	timeoutDuration := 120 //seconds
-	client := ollama.NewDefaultClient(timeoutDuration, ollama.DefaultLocalBaseURL, "llama2")
-	resp, err := client.Generate("what is life?")
+	client := ollama.NewDefaultClient(timeoutDuration, ollama.DefaultLocalBaseURL)
+	reqBody := ollama.RequestGenerate{
+		Model:  "llama3.2:1b",
+		Prompt: "What is the formula for calculating the area of a rectangle?",
+	}
+	resp, err := client.Generate(reqBody)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(resp)
+	fmt.Println(*resp)
 
 }
