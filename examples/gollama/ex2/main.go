@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"llma/internal/ollama"
 	"log"
@@ -36,16 +35,7 @@ func main() {
 		Prompt: "Is this a picture of a cat?",
 		Images: []string{b64Img},
 	}
-	respReader, err := client.GenerateAPI(reqBody)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer respReader.Close()
-
-	decoder := json.NewDecoder(respReader)
-
-	var resp ollama.ResponseGenerate
-	err = decoder.Decode(&resp)
+	resp, err := client.GenerateAPI(reqBody)
 	if err != nil {
 		log.Fatal(err)
 	}

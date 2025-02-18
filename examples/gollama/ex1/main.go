@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"llma/internal/ollama"
 	"log"
@@ -15,16 +14,7 @@ func main() {
 		Model:  "llama3.2:1b",
 		Prompt: "What is the formula for calculating the area of a rectangle?",
 	}
-	respReader, err := client.GenerateAPI(reqBody)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer respReader.Close()
-
-	decoder := json.NewDecoder(respReader)
-
-	var resp ollama.ResponseGenerate
-	err = decoder.Decode(&resp)
+	resp, err := client.GenerateAPI(reqBody)
 	if err != nil {
 		log.Fatal(err)
 	}

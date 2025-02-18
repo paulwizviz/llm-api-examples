@@ -2,7 +2,6 @@ package ollama
 
 import (
 	"encoding/base64"
-	"io"
 )
 
 const (
@@ -37,7 +36,7 @@ type ResponseGenerate struct {
 }
 
 type Client interface {
-	GenerateAPI(request RequestGenerate) (io.ReadCloser, error)
+	GenerateAPI(request RequestGenerate) ([]ResponseGenerate, error)
 }
 
 func NewDefaultClient(timeout int, baseURL string) Client {
