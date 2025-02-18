@@ -121,7 +121,8 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
 ### Go and Llama
     
 * [Example 1](../examples/gollama/ex1/main.go) - This demonstrates a text completion interaction with Llama via RESTFul API.
-* [Example 2](../examples/gollama/ex2/main.go) - This demonstrates recognition of images.
+* [Example 2](../examples/gollama/ex2/main.go) - This demonstrates a text completion interaction with Llama for streaming response.
+* [Example 3](../examples/gollama/ex3/main.go) - This demonstrates interaction with Llama asking about the feature of a picture.
 
 ### Using curl
 
