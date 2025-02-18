@@ -120,7 +120,8 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
 
 ### Go and Llama
     
-* [Example 1](../examples/gollama/ex1/main.go) - This example demonstrates a text completion interaction with Llama via RESTFul API.
+* [Example 1](../examples/gollama/ex1/main.go) - This demonstrates a text completion interaction with Llama via RESTFul API.
+* [Example 2](../examples/gollama/ex2/main.go) - This demonstrates recognition of images.
 
 ### Using curl
 
