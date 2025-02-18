@@ -3,6 +3,7 @@ package ollama
 import (
 	"bytes"
 	"encoding/json"
+	"io"
 	"net/http"
 	"net/url"
 	"time"
@@ -13,7 +14,7 @@ type defaultClient struct {
 	timeout int // seconds
 }
 
-func (c defaultClient) Generate(request RequestGenerate) (*ResponseGenerate, error) {
+func (c defaultClient) GenerateAPI(request RequestGenerate) (io.ReadCloser, error) {
 
 	endPoint, err := url.JoinPath(c.baseURL, "/api/generate")
 	if err != nil {
@@ -41,15 +42,6 @@ func (c defaultClient) Generate(request RequestGenerate) (*ResponseGenerate, err
 	if err != nil {
 		return nil, err
 	}
-	defer response.Body.Close()
 
-	decoder := json.NewDecoder(response.Body)
-
-	var respBody ResponseGenerate
-	err = decoder.Decode(&respBody)
-	if err != nil {
-		return nil, err
-	}
-
-	return &respBody, nil
+	return response.Body, nil
 }

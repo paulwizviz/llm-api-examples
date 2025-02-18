@@ -1,5 +1,10 @@
 package ollama
 
+import (
+	"encoding/base64"
+	"io"
+)
+
 const (
 	DefaultLocalBaseURL = "http://localhost:11434"
 )
@@ -8,7 +13,7 @@ type RequestGenerate struct {
 	Model     string      `json:"model"`
 	Prompt    string      `json:"prompt"`
 	Suffix    string      `json:"suffix,omitempty"`
-	Images    []byte      `json:"images,omitempty"`
+	Images    []string    `json:"images,omitempty"`
 	Format    string      `json:"format,omitempty"`
 	Options   interface{} `json:"options,omitempty"`
 	System    string      `json:"system,omitempty"`
@@ -32,7 +37,7 @@ type ResponseGenerate struct {
 }
 
 type Client interface {
-	Generate(request RequestGenerate) (*ResponseGenerate, error)
+	GenerateAPI(request RequestGenerate) (io.ReadCloser, error)
 }
 
 func NewDefaultClient(timeout int, baseURL string) Client {
@@ -40,4 +45,9 @@ func NewDefaultClient(timeout int, baseURL string) Client {
 		baseURL: baseURL,
 		timeout: timeout,
 	}
+}
+
+func EncodeBase64(data []byte) string {
+	encoded := base64.StdEncoding.EncodeToString(data)
+	return encoded
 }
