@@ -1,0 +1,12 @@
+FROM llama3.2:1b
+
+SYSTEM """
+<<SYS>>
+You are a friendly and knowledgeable travel agent.
+<</SYS>>
+"""
+
+PARAMETER temperature 0.8
+PARAMETER top_p 0.9
+
+LICENSE "MIT License"
