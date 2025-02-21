@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"llma/internal/ollama"
+	"llma/internal/gollama"
 	"log"
 	"os"
 	"path/filepath"
@@ -24,13 +24,13 @@ func readImage(fname string) ([]byte, error) {
 func main() {
 
 	img, err := readImage("cat.jpeg")
-	b64Img := ollama.EncodeBase64(img)
+	b64Img := gollama.EncodeBase64(img)
 	if err != nil {
 		log.Fatal(err)
 	}
 	timeoutDuration := 120 //seconds
-	client := ollama.NewDefaultClient(timeoutDuration, ollama.DefaultLocalBaseURL)
-	reqBody := ollama.RequestGenerate{
+	client := gollama.NewDefaultClient(timeoutDuration, gollama.DefaultLocalBaseURL)
+	reqBody := gollama.RequestGenerate{
 		Model:  "llava",
 		Prompt: "Is this a picture of a cat?",
 		Images: []string{b64Img},
