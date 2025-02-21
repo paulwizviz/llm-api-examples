@@ -132,6 +132,10 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
     * Using custom client [here](../internal/gollama/).
     * Request the server to analyse a picture of a [kitten](../testdata/cat.jpeg).
     * [Source](../examples/gollama/ex3/main.go).
+* Example 4
+    * Chat scenario where the model is the role of an assistant.
+    * A user sends a greeting by saying Hi and then followed by asking the model to tell him about Italy in one sentence.
+    * [Source](../examples/gollama/ex4/main.go)
 
 ### Using curl
 
