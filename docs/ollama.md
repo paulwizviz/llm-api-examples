@@ -119,12 +119,23 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
 ## Working examples
 
 ### Go and Llama
-    
-* [Example 1](../examples/gollama/ex1/main.go) - This demonstrates a text completion interaction with Llama via RESTFul API.
-* [Example 2](../examples/gollama/ex2/main.go) - This demonstrates a text completion interaction with Llama for streaming response.
-* [Example 3](../examples/gollama/ex3/main.go) - This demonstrates interaction with Llama asking about the feature of a picture.
+
+* Example 1
+    * Text completion
+    * Based on the official [Ollama API](https://github.com/ollama/ollama) to interact with the server.
+    * Response with no streaming.
+    * [Source](../examples/gollama/ex1/main.go).
+* Example 2
+    * Same as Example 1 with no streaming response.
+    * [Source](../examples/gollama/ex2/main.go).
+* Example 3
+    * Using custom client [here](../internal/gollama/).
+    * Request the server to analyse a picture of a [kitten](../testdata/cat.jpeg).
+    * [Source](../examples/gollama/ex3/main.go).
 
 ### Using curl
 
-* [Example 1](../examples/curl/ex1.sh) - This example demonstrates a text completion scenario using `curl` to interact with Llama via RESTFul API streaming set to true.
-* [Example 2](../examples/curl/ex2.sh) - This example demonstrates a text completion scenaio using `curl` to interact with Llama via RESTFul API streaming set to false.
+The following examples uses `curl`.
+
+* [Example 1](../examples/curl/ex1.sh) - As per Go example 1.
+* [Example 2](../examples/curl/ex2.sh) - As per Go example 2.
