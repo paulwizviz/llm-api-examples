@@ -136,6 +136,10 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
     * Chat scenario where the model is the role of an assistant.
     * A user sends a greeting by saying Hi and then followed by asking the model to tell him about Italy in one sentence.
     * [Source](../examples/gollama/ex4/main.go)
+* Example 5
+    * Text response
+    * Asking for a response in JSON
+    * [Source](../examples/gollama/ex5/main.go)
 
 ### Using curl
 
