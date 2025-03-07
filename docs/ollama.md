@@ -1,6 +1,6 @@
 # Ollama
 
-Ollama is a tool that simplifies running and managing large language models locally on your computer.
+Ollama is a High-level tool, writen in Go, that simplifies running and managing large language models locally on your computer.
 
 ## Contents
 
@@ -10,12 +10,12 @@ Ollama is a tool that simplifies running and managing large language models loca
 * [Programming Techniques](#programming-techniques)
 * [Working Examples](#working-examples)
 
-## Installing and Setup
+## Installion and Setup
 
-### MacOS 
+### macOS 
 
 * Homebrew `brew install ollama`.
-    * This does not install a macOS Application
+    * This does not install a macOS Application only cli
     * You will need to start ollama's controller manually by running the command `ollama serve` before you can run a model.
 * Other approach refer to [Github](https://github.com/ollama/ollama).
 

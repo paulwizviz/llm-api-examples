@@ -5,7 +5,8 @@ This is an educational project demonstrating techniques writing applications tha
 ## Topics
 
 * [Ollama](./docs/ollama.md)
-
+* [Llama.cpp](./docs/llamacpp.md)
+* [Large Language Model Meta AI (LLaMA)](./docs/llama.md)
 
 ## Disclaimer
 
