@@ -124,26 +124,26 @@ Here is the [official reference](https://github.com/ollama/ollama/blob/main/docs
     * Text completion
     * Based on the official [Ollama API](https://github.com/ollama/ollama) to interact with the server.
     * Response with no streaming.
-    * [Source](../examples/gollama/ex1/main.go).
+    * [Source](../examples/ollama/gollama/ex1/main.go).
 * Example 2
     * Same as Example 1 with no streaming response.
-    * [Source](../examples/gollama/ex2/main.go).
+    * [Source](../examples/ollama/gollama/ex2/main.go).
 * Example 3
     * Using custom client [here](../internal/gollama/).
     * Request the server to analyse a picture of a [kitten](../testdata/cat.jpeg).
-    * [Source](../examples/gollama/ex3/main.go).
+    * [Source](../examples/ollama/gollama/ex3/main.go).
 * Example 4
     * Chat scenario where the model is the role of an assistant.
     * A user sends a greeting by saying Hi and then followed by asking the model to tell him about Italy in one sentence.
-    * [Source](../examples/gollama/ex4/main.go)
+    * [Source](../examples/ollama/gollama/ex4/main.go)
 * Example 5
     * Text response
     * Asking for a response in JSON
-    * [Source](../examples/gollama/ex5/main.go)
+    * [Source](../examples/ollama/gollama/ex5/main.go)
 
 ### Using curl
 
 The following examples uses `curl`.
 
-* [Example 1](../examples/curl/ex1.sh) - As per Go example 1.
-* [Example 2](../examples/curl/ex2.sh) - As per Go example 2.
+* [Example 1](../examples/ollama/curl/ex1.sh) - As per Go example 1.
+* [Example 2](../examples/ollama/curl/ex2.sh) - As per Go example 2.
