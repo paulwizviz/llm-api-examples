@@ -25,17 +25,22 @@ This is the REST API to interact with AI models
 
 ## Working Examples
 
-### Go and LM Studio interaction
+The following examples demonstrate interactions with LM Studio
 
-* Example 1
-    * Using [REST API client implementation](../internal/golm)
-    * List models
-    * [Source](../examples/lm-studio/ex1/main.go)
-* Example 2
-    * Using [REST API client implementation](../internal/golm)
-    * Using the endpoing /v1/completion with no streaming
-    * [Source](../examples/lm-studio/ex2/main.go)
-* Example 3
-    * Using [REST API client implementation](../internal/golm)
-    * Using the endpoing /v1/completion with streaming
-    * [Source](../examples/lm-studio/ex3/main.go)
+### Example 1
+
+* Go client application to get a list of models.
+* Using OpenAI compatible endpoint `v1/models`.
+* [Example code](../examples/lm-studio/ex1/main.go).
+
+### Example 2
+
+* Asking LLM to list cryptocurrencies
+* Using OpenAI compatible endpoint `/v1/completion` with no streaming
+* [Example code](../examples/lm-studio/ex2/main.go)
+
+### Example 3
+
+* Asking LLM to list cryptocurrencies
+* Using the OpenAPI compatible `/v1/completion` with streaming
+* [Source](../examples/lm-studio/ex3/main.go)

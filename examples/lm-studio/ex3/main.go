@@ -1,23 +1,43 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
-	"llma/internal/golm"
+	"io"
 	"log"
+	"net/http"
+	"time"
 )
 
 func main() {
-	client := golm.NewClient("http://localhost:1234", 120)
-	req := golm.CompletionRequest{
-		Model:  "gemma-2-2b-it",
-		Prompt: []string{"Give me a list of 3 cryptocurrencies", "Please only present the list in HTML only."},
-		Stream: true,
+	client := http.Client{
+		Timeout: 120 * time.Second,
 	}
-	resp, err := client.Completion(req)
+	reqBody := make(map[string]any)
+	reqBody["model"] = "gemma-2-2b-it"
+	reqBody["prompt"] = []string{"Give me a list of 3 cryptocurrencies", "Please only present the list in HTML only."}
+	reqBody["stream"] = true
+
+	b, err := json.Marshal(reqBody)
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, r := range resp {
-		fmt.Println(r)
+	reader := bytes.NewReader(b)
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:1234/v1/completions", reader)
+	if err != nil {
+		log.Fatal(err)
 	}
+	req.Header.Set("Content-Type", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(body))
 }
