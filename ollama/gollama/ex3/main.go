@@ -39,6 +39,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	fmt.Println(resp)
+	fmt.Println("Response:", resp)
 }
